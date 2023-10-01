@@ -1,4 +1,6 @@
 <script>
+    import LoginForm from "$lib/LoginForm.svelte";
+
     let username = "";
     let token = "";
 
@@ -22,12 +24,6 @@
         return data.data;
     };
 
-    const login = () => {
-        document.cookie = `token=${token}`;
-
-        window.location.href = "/home";
-    }
-
     const handleSubmit = async () => {
         console.log(username, token);
 
@@ -45,15 +41,17 @@
 </script>
 
 <div class="main">
-    <form class="login-form" on:submit|preventDefault={handleSubmit}>
+    <LoginForm />
+
+    <form class="register-form" on:submit|preventDefault={handleSubmit}>
         <div class="form-row">
-            <input bind:value={username} type="text" name="username" id="login-username" placeholder="Username">
+            <input bind:value={username} type="text" name="username" id="register-username" placeholder="Username">
         </div>
         <div class="form-row">
-            <input bind:value={token} type="password" name="token" id="login-token" placeholder="Token">
+            <input bind:value={token} type="password" name="token" id="register-token" placeholder="Token" readonly>
         </div>
         <div class="form-row">
-            <input type="submit" value="Log-in">
+            <input type="submit" value="Register">
         </div>
     </form>
 </div>
