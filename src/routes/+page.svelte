@@ -25,7 +25,7 @@
     const login = () => {
         document.cookie = `token=${token}`;
 
-        
+        window.location.href = "/home";
     }
 
     const handleSubmit = async () => {
@@ -40,7 +40,7 @@
             return;
         }
 
-        
+        login();
     };
 </script>
 
