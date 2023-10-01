@@ -1,6 +1,16 @@
 <script>
+    import { onMount } from "svelte";
+
     let username = "";
     let token = "";
+
+    const skipLogin = () => {
+        const cookies = document.cookie;
+
+        if (cookies.includes("token=")) {
+            window.location.href = "/home";
+        }
+    }
 
     const getAgentInfo = async (userToken) => {
         const options = {
@@ -35,13 +45,17 @@
 
         if (!agent) return;
 
-        if (agent.symbol !== username) {
+        if (agent.symbol !== username.toUpperCase()) {
             console.log("Invalid username!");
             return;
         }
 
         login();
     };
+
+    onMount(async () => {
+        skipLogin();
+    });
 </script>
 
 <form class="login-form" on:submit|preventDefault={handleSubmit}>
